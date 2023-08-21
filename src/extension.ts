@@ -1,25 +1,54 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+const allConfig = vscode.workspace.getConfiguration();
+const config = allConfig.gohome;
+
+const GetOffMessage = '已经下班啦~ 赶紧滚回家去';
+const NotificationMessage = '到点啦~ 该下班了!';
+
+/** 获取提示消息 */
+function getMessage() {
+    const now = new Date();
+    const goHome = new Date();
+    goHome.setHours(config.hour);
+    goHome.setMinutes(config.minute);
+    goHome.setSeconds(0);
+    
+	const duration = goHome.getTime() - now.getTime();
+    if (duration <= 0) {
+        return GetOffMessage;
+    }
+
+    const hour = Math.floor(duration / 1000 / 60 / 60);
+    const minute = Math.floor(duration / 1000 / 60 % 60);
+    const second = Math.floor(duration / 1000 % 60);
+
+    return `>> 距离下班还有 ${hour ? hour + '小时' : ''}${minute ? minute + '分钟' : ''}${second ? second + '秒' : ''}`;
+}
+
+/** 是否已经提醒过下班 */
+let isGetOff = false;
+
 export function activate(context: vscode.ExtensionContext) {
+	const myStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "go-off-work" is now active!');
+	myStatusBarItem.text = getMessage(),
+	myStatusBarItem.show();
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('go-off-work.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from 下班倒计时助手!');
-	});
+	setInterval(() => {
+		const newMessage = getMessage();
+		myStatusBarItem.text = newMessage;
+		if (newMessage === GetOffMessage) {
+			if (!isGetOff) {
+				vscode.window.showInformationMessage(NotificationMessage);
+				isGetOff = true;
+			}
+		} else {
+			isGetOff = false;
+		}
+	}, 1000);
 
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(myStatusBarItem);
 }
 
 // This method is called when your extension is deactivated

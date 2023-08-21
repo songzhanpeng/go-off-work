@@ -12,12 +12,25 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "go-off-work.helloWorld",
-        "title": "Hello World"
+    "commands": [],
+    "configuration": {
+      "type": "object",
+      "title": "GoHome",
+      "properties": {
+        "gohome.hour": {
+          "scope": "window",
+          "type": "number",
+          "description": "下班时间, 小时(24小时制)",
+          "default": 18
+        },
+        "gohome.minute": {
+          "scope": "window",
+          "type": "number",
+          "description": "下班时间, 分钟",
+          "default": 0
+        }
       }
-    ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
