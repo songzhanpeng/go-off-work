@@ -40,13 +40,14 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "npm run patch && npm run compile",
     "clean": "rimraf node_modules",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "patch": "npm version patch"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
