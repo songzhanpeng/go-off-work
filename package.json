@@ -4,6 +4,7 @@
   "description": "在状态栏显示距离下班还有多少时间，并在下班时间到达时提醒你的 VS Code 插件。",
   "version": "0.0.3",
   "publisher": "songzhanpeng",
+  "icon": "icons/logo.png",
   "engines": {
     "vscode": "^1.81.0"
   },
