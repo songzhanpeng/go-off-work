@@ -40,7 +40,7 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run patch && npm run compile",
+    "vscode:prepublish": "npm run compile",
     "clean": "rimraf node_modules",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
