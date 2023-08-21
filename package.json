@@ -1,7 +1,7 @@
 {
   "name": "go-off-work",
   "displayName": "下班倒计时助手",
-  "description": "go off work",
+  "description": "在状态栏显示距离下班还有多少时间，并在下班时间到达时提醒你的 VS Code 插件。",
   "version": "0.0.2",
   "publisher": "songzhanpeng",
   "engines": {
@@ -19,7 +19,12 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [],
+    "commands": [
+      {
+        "command": "setGoOffWorkTime",
+				"title": "设置下班时间"
+      }
+    ],
     "configuration": {
       "type": "object",
       "title": "GoOffWork",
@@ -27,13 +32,13 @@
         "goOffWork.hour": {
           "scope": "window",
           "type": "number",
-          "description": "下班时间, 小时(24小时制)",
+          "description": "设置下班的小时数",
           "default": 18
         },
         "goOffWork.minute": {
           "scope": "window",
           "type": "number",
-          "description": "下班时间, 分钟",
+          "description": "设置下班的分钟数",
           "default": 0
         }
       }
