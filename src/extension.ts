@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
 const allConfig = vscode.workspace.getConfiguration();
-const config = allConfig.gohome;
+const config = allConfig.goOffWork;
 
 const GetOffMessage = '已经下班啦~ 赶紧滚回家去';
 const NotificationMessage = '到点啦~ 该下班了!';
@@ -9,12 +9,12 @@ const NotificationMessage = '到点啦~ 该下班了!';
 /** 获取提示消息 */
 function getMessage() {
     const now = new Date();
-    const goHome = new Date();
-    goHome.setHours(config.hour);
-    goHome.setMinutes(config.minute);
-    goHome.setSeconds(0);
+    const goOffWork = new Date();
+    goOffWork.setHours(config.hour);
+    goOffWork.setMinutes(config.minute);
+    goOffWork.setSeconds(0);
     
-	const duration = goHome.getTime() - now.getTime();
+	const duration = goOffWork.getTime() - now.getTime();
     if (duration <= 0) {
         return GetOffMessage;
     }
