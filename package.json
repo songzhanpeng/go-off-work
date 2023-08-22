@@ -2,7 +2,7 @@
   "name": "go-off-work",
   "displayName": "下班倒计时助手",
   "description": "在状态栏显示距离下班还有多少时间，并在下班时间到达时提醒你的 VS Code 插件。",
-  "version": "0.0.5",
+  "version": "0.0.4",
   "publisher": "songzhanpeng",
   "icon": "icons/logo.png",
   "engines": {
