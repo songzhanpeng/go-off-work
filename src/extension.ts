@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { getOffMessage1, notificationMessage } from "./constant";
+import { getOffMessage, notificationMessage } from "./constant";
 import type { Config } from ".//types";
 import { getMessage } from "./utils";
 
