@@ -50,10 +50,10 @@
     "clean": "rimraf node_modules",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js",
-    "patch": "npm version patch"
+    "test": "vitest",
+    "patch": "npm version patch",
+    "precommit": "npm run lint"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
@@ -67,6 +67,7 @@
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
     "rimraf": "^5.0.1",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.3",
+    "vitest": "^0.34.2"
   }
 }
