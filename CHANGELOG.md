@@ -1,9 +1,24 @@
-# Change Log
+# 版本更新记录
 
-All notable changes to the "go-off-work" extension will be documented in this file.
+"下班提醒插件（go-off-work）" 扩展的重要更新将在此文件中记录。
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [0.0.5] - 2023-08-22
 
-## [Unreleased]
+* 新增 单元测试，优化 不停创建 statusBar 导致的闪屏问题
 
-- Initial release
+## [0.0.4] - 2023-08-21
+
+* 新增插件 logo 用的是 崩坏星穹铁道 青雀角色头像
+
+## [0.0.3] - 2023-08-21
+
+* 支持命令  `设置下班时间` 时间函数补零
+
+## [0.0.2] - 2023-08-21
+
+* 修复扩展加载后不显示时间问题
+
+## [0.0.1] - 2023-08-21
+
+
+* 初始发布，提供基本的下班提醒功能。
