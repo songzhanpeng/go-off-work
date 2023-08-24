@@ -16,6 +16,8 @@
 
 - `goOffWork.hour`：设置下班的小时数。
 - `goOffWork.minute`：设置下班的分钟数。
+- `goOffWork.notificationMessage`设置右下角通知信息
+- `goOffWork.getOffMessage`设置到时间提示信息
 
 你可以通过修改这些设置来自定义下班时间。
 
