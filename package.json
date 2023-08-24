@@ -24,6 +24,14 @@
       {
         "command": "setGoOffWorkTime",
         "title": "设置下班时间"
+      },
+      {
+        "command": "setNotificationMessage",
+        "title": "设置通知信息"
+      },
+      {
+        "command": "setGetOffMessage",
+        "title": "设置提示信息"
       }
     ],
     "configuration": {
@@ -41,6 +49,24 @@
           "type": "number",
           "description": "设置下班的分钟数",
           "default": 0
+        },
+        "goOffWork.role": {
+          "scope": "window",
+          "type": "string",
+          "description": "设置角色",
+          "default": ""
+        },
+        "goOffWork.notificationMessage": {
+          "scope": "window",
+          "type": "string",
+          "description": "设置右下角通知信息",
+          "default": "到点啦~ 该下班了!"
+        },
+        "goOffWork.getOffMessage": {
+          "scope": "window",
+          "type": "string",
+          "description": "设置到时间提示信息",
+          "default": "已经下班啦~ 赶紧滚回家去"
         }
       }
     }

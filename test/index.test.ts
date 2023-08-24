@@ -56,5 +56,9 @@ describe("utils functions", () => {
     expect(getMessage(fixedDateTime, { hour: 17, minute: 0 })).toBe(
       ">> 距离下班还有 07小时00分钟00秒"
     );
+
+    expect(getMessage(fixedDateTime, { hour: 10, minute: 0, getOffMessage: "xxxxxxxxxxx" })).toBe(
+      "xxxxxxxxxxx"
+    );
   });
 });

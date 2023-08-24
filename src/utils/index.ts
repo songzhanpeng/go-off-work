@@ -18,13 +18,12 @@ export const messageTemplate = (
 // 获取提示消息
 export function getMessage(now: Date, config: Config): string {
   const goOffWork = new Date();
-  goOffWork.setHours(config.hour);
-  goOffWork.setMinutes(config.minute);
-  goOffWork.setSeconds(0);
+  goOffWork.setHours(config.hour, config.minute, 0, 0); // 将秒和毫秒设置为0
 
-  const duration = goOffWork.getTime() - now.getTime();
+  const duration = Math.max(goOffWork.getTime() - now.getTime(), 0);
+
   if (duration <= 0) {
-    return getOffMessage;
+    return config.getOffMessage || getOffMessage;
   }
 
   const hour = Math.floor(duration / 1000 / 60 / 60);
@@ -33,3 +32,4 @@ export function getMessage(now: Date, config: Config): string {
 
   return messageTemplate(hour, minute, second);
 }
+

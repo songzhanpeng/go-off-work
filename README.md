@@ -45,12 +45,16 @@
 
 新增 单元测试，优化 不停创建 statusBar 导致的闪屏问题
 
+### 0.0.6
+
+新增 支持通知自定义 `notificationMessage` 消息自定义  `getOffMessage`
+
 ---
 
 ## 遵循扩展准则
 
 确保你已阅读扩展准则，并遵循最佳实践来创建你的扩展。
 
-* [扩展准则](https://code.visualstudio.com/api/references/extension-guidelines)
+- [扩展准则](https://code.visualstudio.com/api/references/extension-guidelines)
 
 **尽情享受！**
