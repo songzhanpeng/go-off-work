@@ -24,7 +24,9 @@ function updateStatusBarItem(config: Config) {
   showStatusBarMessage(newMessage);
 
   if (newMessage === (config.getOffMessage || getOffMessage)) {
-    vscode.window.showInformationMessage(config.notificationMessage || notificationMessage);
+    vscode.window.showInformationMessage(
+      config.notificationMessage || notificationMessage
+    );
     clearInterval(timer!);
   } else {
     timer = setTimeout(() => {
@@ -35,56 +37,93 @@ function updateStatusBarItem(config: Config) {
 
 // 设置下班时间的命令
 async function setGoOffWorkTime() {
-  const config = vscode.workspace.getConfiguration().get<Config>("goOffWork") as Config;
+  const config = vscode.workspace
+    .getConfiguration()
+    .get<Config>("goOffWork") as Config;
 
   const inputValue = await vscode.window.showInputBox({
-    placeHolder: "请输入下班时间（HH:mm）"
+    placeHolder: "请输入下班时间（HH:mm）",
   });
 
   if (inputValue) {
     const [hour, minute] = inputValue.split(":");
-    if (!isNaN(Number(hour)) && !isNaN(Number(minute))) {
-      config.hour = Number(hour);
-      config.minute = Number(minute);
+    const parsedHour = parseInt(hour, 10);
+    const parsedMinute = parseInt(minute, 10);
+
+    if (
+      !isNaN(parsedHour) &&
+      !isNaN(parsedMinute) &&
+      parsedHour >= 0 &&
+      parsedHour < 24 &&
+      parsedMinute >= 0 &&
+      parsedMinute < 60
+    ) {
+      config.hour = parsedHour;
+      config.minute = parsedMinute;
 
       const configuration = vscode.workspace.getConfiguration();
-      await configuration.update("goOffWork.hour", config.hour, vscode.ConfigurationTarget.Global);
-      await configuration.update("goOffWork.minute", config.minute, vscode.ConfigurationTarget.Global);
+      await configuration.update(
+        "goOffWork.hour",
+        config.hour,
+        vscode.ConfigurationTarget.Global
+      );
+      await configuration.update(
+        "goOffWork.minute",
+        config.minute,
+        vscode.ConfigurationTarget.Global
+      );
+
+      // 通知
+      vscode.window.showInformationMessage(`下班时间设置成功 >> ${inputValue}`);
     } else {
-      vscode.window.showErrorMessage("请输入有效的时间格式（HH:mm）！");
+      vscode.window.showErrorMessage(
+        `请输入有效的时间格式 (HH:mm) >> ${inputValue} ???`
+      );
     }
   }
 }
 
 // 设置通知信息 `notificationMessage`
 async function setNotificationMessage() {
-  const config = vscode.workspace.getConfiguration().get<Config>("goOffWork") as Config;
+  const config = vscode.workspace
+    .getConfiguration()
+    .get<Config>("goOffWork") as Config;
 
   const inputValue = await vscode.window.showInputBox({
-    placeHolder: "请输入通知信息"
+    placeHolder: "请输入通知信息",
   });
 
   if (inputValue) {
     config.notificationMessage = inputValue;
 
     const configuration = vscode.workspace.getConfiguration();
-    await configuration.update("goOffWork.notificationMessage", config.notificationMessage, vscode.ConfigurationTarget.Global);
+    await configuration.update(
+      "goOffWork.notificationMessage",
+      config.notificationMessage,
+      vscode.ConfigurationTarget.Global
+    );
   }
 }
 
 // 设置提示信息 `getOffMessage`
 async function setGetOffMessage() {
-  const config = vscode.workspace.getConfiguration().get<Config>("goOffWork") as Config;
+  const config = vscode.workspace
+    .getConfiguration()
+    .get<Config>("goOffWork") as Config;
 
   const inputValue = await vscode.window.showInputBox({
-    placeHolder: "请输入提示信息"
+    placeHolder: "请输入提示信息",
   });
 
   if (inputValue) {
     config.getOffMessage = inputValue;
 
     const configuration = vscode.workspace.getConfiguration();
-    await configuration.update("goOffWork.getOffMessage", config.getOffMessage, vscode.ConfigurationTarget.Global);
+    await configuration.update(
+      "goOffWork.getOffMessage",
+      config.getOffMessage,
+      vscode.ConfigurationTarget.Global
+    );
   }
 }
 
@@ -120,12 +159,14 @@ export function activate(context: vscode.ExtensionContext) {
     // 注册设置通知信息的命令
     { command: "setNotificationMessage", handler: setNotificationMessage },
     // 注册设置提示信息的命令
-    { command: "setGetOffMessage", handler: setGetOffMessage }
+    { command: "setGetOffMessage", handler: setGetOffMessage },
   ];
-  
+
   commandMappings.forEach(({ command, handler }) => {
     // 注册命令
-    context.subscriptions.push(vscode.commands.registerCommand(command, handler));
+    context.subscriptions.push(
+      vscode.commands.registerCommand(command, handler)
+    );
   });
 }
 
