@@ -16,9 +16,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:setGoOffWorkTime",
-    "onCommand:setNotificationMessage",
-    "onCommand:setGetOffMessage"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {
